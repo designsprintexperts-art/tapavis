@@ -428,6 +428,11 @@
     .plan:hover{transform:none}
   }
 
+  /* petits ecrans : recadrage serre sur les produits, le fond noir de droite ne sert plus */
+  @media (max-width:700px){
+    .pricing-bg{aspect-ratio:1350/972}
+  }
+
   @media (max-width:860px){
     .nav-links{display:none}
     .nav-cta{display:none}
@@ -444,9 +449,6 @@
     }
 
     .pricing-layout{flex-direction:column;aspect-ratio:auto;border-radius:24px}
-    .pricing-bg{position:relative;aspect-ratio:16/10}
-    .pricing-bg img{object-position:12% center}
-    .pricing-bg::after{background:linear-gradient(180deg, transparent 0%, transparent 50%, var(--bg-dark-2) 100%)}
     .pricing-layout .plans-1{margin:0;padding:28px 22px 6px;width:100%;box-sizing:border-box}
     .plans-1{max-width:100%;margin:0 auto}
     .problem-img{order:-1;justify-content:center}
