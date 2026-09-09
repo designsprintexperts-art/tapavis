@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://designsprintexperts-art.github.io/tapavis/sitemap.xml
