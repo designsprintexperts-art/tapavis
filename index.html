@@ -203,7 +203,7 @@
   }
   .hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
   .hero-bg img{
-    width:100%;height:100%;object-fit:cover;object-position:38% 40%;display:block;
+    width:100%;height:100%;object-fit:cover;object-position:24% 42%;display:block;
     transform:translate3d(0,var(--hero-y,0px),0) scale(var(--hero-s,1.08));
     will-change:transform;
   }
@@ -264,12 +264,26 @@
   /* ---------- how it works ---------- */
   .how{padding:140px 0;background:var(--bg-dark-2)}
   .how h2{font-size:clamp(2rem,4vw,3rem);max-width:600px;margin-bottom:70px}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-  .step{border:1px solid var(--line-dark);border-radius:var(--radius-md);padding:32px 26px;background:rgba(255,255,255,.02)}
-  .step-num{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:22px}
-  .step-icon{width:44px;height:44px;margin-bottom:22px}
-  .step h3{font-size:1.25rem;margin-bottom:10px}
-  .step p{color:var(--text-dim);font-size:.95rem;line-height:1.55}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .step{
+    border:1px solid var(--line-dark);border-radius:var(--radius-md);
+    padding:32px 30px 34px;background:rgba(255,255,255,.02);
+    display:flex;flex-direction:column;
+  }
+  /* icone et numero sur une meme ligne : un seul bloc d'identification */
+  .step-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+  .step-icon-wrap{
+    width:54px;height:54px;border-radius:16px;flex-shrink:0;
+    background:rgba(10,132,255,.13);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step-icon{width:27px;height:27px;display:block}
+  .step-num{
+    font-size:2.6rem;font-weight:700;line-height:1;letter-spacing:-.03em;
+    color:rgba(255,255,255,.26);font-variant-numeric:tabular-nums;
+  }
+  .step h3{font-size:1.28rem;line-height:1.25;letter-spacing:-.012em;margin-bottom:12px}
+  .step p{color:var(--text-dim);font-size:.95rem;line-height:1.6;margin:0}
 
   /* ---------- compare ---------- */
   .compare{padding:140px 0}
@@ -289,7 +303,10 @@
   .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .plans-2{grid-template-columns:repeat(2,1fr);max-width:680px;margin:0 auto}
   .plans-1{grid-template-columns:1fr;max-width:380px;margin:0 auto}
-  .pricing-layout{position:relative;display:flex;align-items:center;justify-content:flex-end;aspect-ratio:2284/972;margin-top:56px;border-radius:32px;overflow:hidden;background:var(--bg-dark-2)}
+  .pricing-layout{position:relative;display:flex;align-items:center;justify-content:flex-end;
+    margin-top:56px;border-radius:32px;overflow:hidden;background:var(--bg-dark-2)}
+  /* cale la hauteur mini sur le ratio de l'image (972/2284 = 42.56%) */
+  .pricing-layout::before{content:"";flex:0 0 auto;width:0;padding-top:42.56%}
   .pricing-bg{position:absolute;inset:0;z-index:0}
   .pricing-bg img{
     width:100%;height:100%;object-fit:cover;object-position:left center;display:block;cursor:zoom-in;
@@ -348,6 +365,10 @@
   .plan-list{margin-top:26px;display:flex;flex-direction:column;gap:12px}
   .plan-list li{list-style:none;display:flex;gap:10px;font-size:.92rem;align-items:flex-start}
   .plan-list svg{flex-shrink:0;margin-top:2px}
+  .plan-note{
+    max-width:640px;margin:26px auto 0;text-align:center;
+    font-size:.82rem;line-height:1.55;color:var(--text-dim);
+  }
 
   .kit{margin-top:20px;padding-top:18px;border-top:1px solid var(--line-dark)}
   .kit-label{
@@ -391,6 +412,21 @@
   footer .credit{margin-top:22px;padding-top:18px;border-top:1px solid var(--line-dark);font-size:.78rem}
   footer .credit a{color:var(--text);font-weight:600;border-bottom:1px solid var(--line-dark);transition:color .2s ease,border-color .2s ease}
   footer .credit a:hover{color:var(--accent);border-color:var(--accent)}
+
+  @media (max-width:1080px){
+    .pricing-layout{flex-direction:column;border-radius:24px}
+    .pricing-layout::before{display:none}
+    .pricing-bg{position:relative;aspect-ratio:2284/972}
+    .pricing-bg img{object-position:left center}
+    .pricing-bg::after{
+      background:linear-gradient(180deg,
+        rgba(15,15,17,0) 0%, rgba(15,15,17,.35) 55%,
+        rgba(15,15,17,.85) 82%, var(--bg-dark-2) 100%);
+    }
+    .pricing-layout .plans-1{margin:0;padding:26px 22px 4px;width:100%;box-sizing:border-box}
+    .plan{border:none;background:transparent}
+    .plan:hover{transform:none}
+  }
 
   @media (max-width:860px){
     .nav-links{display:none}
@@ -457,7 +493,7 @@
     <div class="hero-text">
       <div class="eyebrow reveal">Paris intra-muros · Livré en 2h</div>
       <h1 class="reveal reveal-1">Un tap. Un avis.<br><span>Zéro friction.</span></h1>
-      <p class="reveal reveal-2">Carte NFC avis Google livrée et configurée chez vous, en moins de deux heures. Prête devant vous, sans app et sans compte à créer.</p>
+      <p class="reveal reveal-2">Votre client pose son téléphone sur la carte : votre page d'avis Google s'ouvre. Rien à installer, aucun compte à créer. Je viens la configurer chez vous en moins de deux heures.</p>
       <div class="hero-ctas reveal reveal-3">
         <a href="https://wa.me/33635315035?text=Bonjour%2C%20je%20souhaite%20prendre%20RDV%20pour%20une%20carte%20TapAvis.%0AMon%20quartier%20%3A%20%0ACr%C3%A9neau%20souhait%C3%A9%20%3A%20" class="btn-primary pressable" target="_blank" rel="noopener">Prendre RDV sur WhatsApp</a>
         <a href="#pricing" class="btn-secondary pressable">Voir le tarif</a>
@@ -496,22 +532,28 @@
     <h2 class="reveal reveal-1">De la commande à la carte posée sur votre comptoir, en une visite.</h2>
     <div class="steps">
       <div class="step lift reveal reveal-1">
-        <div class="step-num">01</div>
-        <svg class="step-icon" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12Z" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" stroke="#0a84ff" stroke-width="1.6"/></svg>
+        <div class="step-head">
+          <span class="step-icon-wrap"><svg class="step-icon" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12Z" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" stroke="#0a84ff" stroke-width="1.6"/></svg></span>
+          <span class="step-num">01</span>
+        </div>
         <h3>Je me déplace chez vous</h3>
         <p>Je passe dans votre rue sur créneau réservé ou en direct si vous êtes disponible.</p>
       </div>
       <div class="step lift reveal reveal-2">
-        <div class="step-num">02</div>
-        <svg class="step-icon" viewBox="0 0 24 24" fill="none"><rect x="7" y="3" width="10" height="18" rx="2" stroke="#0a84ff" stroke-width="1.6"/><line x1="10" y1="18" x2="14" y2="18" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round"/><path d="M9 12l2 2 4-4" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="step-head">
+          <span class="step-icon-wrap"><svg class="step-icon" viewBox="0 0 24 24" fill="none"><rect x="7" y="3" width="10" height="18" rx="2" stroke="#0a84ff" stroke-width="1.6"/><line x1="10" y1="18" x2="14" y2="18" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round"/><path d="M9 12l2 2 4-4" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="step-num">02</span>
+        </div>
         <h3>Je configure devant vous</h3>
         <p>Votre fiche Google est programmée sur la carte et testée en direct sur mon téléphone. Vous validez avant de payer.</p>
       </div>
       <div class="step lift reveal reveal-3">
-        <div class="step-num">03</div>
-        <svg class="step-icon" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="13" rx="2" stroke="#0a84ff" stroke-width="1.6"/><path d="M2 11h20" stroke="#0a84ff" stroke-width="1.6"/><path d="M6 15h4" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <h3>Vous encaissez, c'est fait</h3>
-        <p>Carte bancaire acceptée sur place. Vous repartez avec votre outil, prêt à l'emploi. Zéro app, zéro compte.</p>
+        <div class="step-head">
+          <span class="step-icon-wrap"><svg class="step-icon" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="13" rx="2" stroke="#0a84ff" stroke-width="1.6"/><path d="M2 11h20" stroke="#0a84ff" stroke-width="1.6"/><path d="M6 15h4" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="step-num">03</span>
+        </div>
+        <h3>Vous payez, c'est à vous</h3>
+        <p>Carte bancaire acceptée sur place. La carte reste chez vous, déjà reliée à votre fiche Google. Zéro app, zéro compte à créer.</p>
       </div>
     </div>
   </div>
@@ -591,6 +633,7 @@
       </div>
       </div>
     </div>
+    <p class="plan-note reveal reveal-3">Le modèle photographié est celui que je livre. S'il est en rupture chez mon fournisseur, je le remplace par un équivalent de même qualité, et je vous le dis avant de passer.</p>
     <div class="specs-strip reveal reveal-4">
       <div class="spec-item"><span class="spec-label">Connectivité</span>Puce NFC</div>
       <div class="spec-item"><span class="spec-label">Compatibilité</span>iPhone &amp; Android</div>
